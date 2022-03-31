@@ -1,2 +1,23 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<h1>Book Page</h1>
+<img src='<%= @book.image_url %>' alt=''>
+<h2><%= @book.title %></h2>
+<p><%= @book.introduction %></p>
+
+<p><small>Created at: <%= @book.created_at %></small></p>
+<label>Created by: <%= @book.user.full_name%> </label>
+ 
+
+<% if can? :crud, @book %>    
+    <%= button_to 'Edit', edit_book_path(@book), method: :get %>
+    <%= button_to 'Delete', book_path(@book), method: :delete, data: { confirm: 'Are you sure?'} %>
+<% end %>
+
+
+
+
+<hr>
+
+<h4>Write your answer</h4>
+
+ 
+ 

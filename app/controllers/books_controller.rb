@@ -22,10 +22,23 @@ class BooksController < ApplicationController
   end
   
 
-  def show
+  def show    
   end
 
   def edit
+  end
+
+  def update
+    if @book.update(book_params)
+      redirect_to book_path(@book.id)
+    else
+      render :edit, status: 303
+    end
+  end
+
+  def destroy
+    @book.destroy
+    redirect_to books_path
   end
 
   private
