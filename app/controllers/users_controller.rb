@@ -15,4 +15,9 @@ class UsersController < ApplicationController
       render :new, status: 303
     end
   end
+
+  def panel_reader
+  end
+  def panel_author
+  end
 end
