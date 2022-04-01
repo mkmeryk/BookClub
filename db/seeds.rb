@@ -8,8 +8,10 @@
 
 Like.destroy_all
 Review.destroy_all
+Rating.destroy_all
 Book.destroy_all
 User.destroy_all
+ 
 
 PASSWORD = "123"
 
@@ -35,7 +37,8 @@ users = User.all
         genre: Faker::Book.genre,  
         image_url: Faker::LoremFlickr.image,      
         introduction: Faker::Movie.quote,
-        user: users.sample
+        user: users.sample,
+        avg_rating: 0
     )
     if b.valid?
         rand(1..3).times do
@@ -46,15 +49,22 @@ users = User.all
                 user: users.sample,
                 likers: users.shuffle.slice(0, rand(users.count))
             )
+            Rating.create(
+                rate: rand(0..6),
+                book: b,
+                user: users.sample
+            )
         end
     end
 end
 
 books = Book.all
-revies = Review.all
+reviews = Review.all
 likes = Like.all
+ratings = Rating.all
 
 puts Cowsay.say("Generated #{books.count} books", :frogs)
 puts Cowsay.say("Generated #{reviews.count} reviews", :cow)
 puts Cowsay.say("Generated #{users.count} users", :koala)
 puts Cowsay.say("Generated #{likes.count} likes", :dragon)
+puts Cowsay.say("Generated #{ratings.count} ratings", :frogs)

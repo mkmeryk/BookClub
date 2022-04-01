@@ -11,7 +11,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
+    @book = Book.new(book_params)     
+    @book.avg_rating = 0
     @book.user = current_user
     if @book.save
       flash.notice = "book created successfully!"
@@ -26,6 +27,19 @@ class BooksController < ApplicationController
     @book = Book.find params[:id]
     @review = Review.new
     @reviews = @book.reviews
+    @rating = Rating.new
+    @ratings = @book.ratings 
+    avg_rating = 0.00
+    sum = 0
+    @ratings.each do |rating|
+      puts "rating #{rating.rate}"
+      sum = sum + rating.rate
+    end
+    if (@ratings.count > 0)
+      avg_rating = (sum / (@ratings.count))    
+    end
+     
+    @book.avg_rating = avg_rating 
   end
 
   def edit

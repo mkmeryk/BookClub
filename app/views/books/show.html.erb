@@ -1,16 +1,18 @@
 <h1>Book Page</h1>
 <img src='<%= @book.image_url %>' alt=''>
 <h2><%= @book.title %></h2>
-<%= fa_icon "star" %>
-<%= fa_icon "star" %>
-<%= fa_icon "star" %>
-<%= fa_icon "star" %>
-<%= fa_icon "star" %>
+ 
+<h1><%= @book.avg_rating %> <%= fa_icon "star" %></h1> 
 <p><%= @book.introduction %></p>
 
 <p><small>Created at: <%= @book.created_at %></small></p>
 <label>Created by: <%= @book.user.full_name%> </label>
- 
+
+ <%= form_with(model:[@book, @rating], url: book_ratings_path(@book)) do |f|%>
+    <%= f.select :rate, [ ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5]] %>
+        <br>
+        <%= f.submit "Rate" , class:"btn btn-primary" %>
+    <% end %>
 
 <% if can? :crud, @book %>    
     <%= button_to 'Edit', edit_book_path(@book), method: :get %>
@@ -52,7 +54,8 @@
             <br>
             <%= f.text_area :body, cols:50, rows: 2 ,class:"form-control" %>
         </div>
-        <%= f.select :approval, ["Nil", "Pending"] %>
+        <%#= f.select :approval, ["Nil", "Pending"] %>
+        <%= f.select :approval, [["Nil", "Nil"], ["Pending", "Pending"], ["Approved", "Approved"], ["Rejected", "Rejected"]] %>
         <br>
         <%= f.submit "send" , class:"btn btn-primary" %>
     <% end %>  
