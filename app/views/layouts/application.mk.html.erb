@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BookClub</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav>
+     <%= link_to 'Books Page', books_index_path%>
+      <%if(user_signed_in?) %>
+        Hello <%= current_user.full_name%>        
+        <%= button_to "Log out", sessions_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Sign In Page', new_sessions_path%>
+      <% end %>
+    </nav>
+    <%= yield %>
+  </body>
+</html>

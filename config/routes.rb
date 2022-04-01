@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rating/new'
+  get 'rating/edit'
 
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
   resources :users
   resource :sessions, only:[:new, :create, :destroy]
   resources :books do 
+    resources :ratings, only:[:create, :edit, :destroy, :update]
     resources :reviews, only:[:create, :edit, :destroy, :update] do
       resources :likes, shallow: true, only: [:create, :destroy]
 
