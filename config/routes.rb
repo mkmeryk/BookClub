@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   root "welcome#index"
   resources :users
   resource :sessions, only:[:new, :create, :destroy]
-  resources :books
+  resources :books do 
+    resources :reviews, only:[:create, :edit, :destroy, :update]
+  end
   get "panel_reader", to: "users#panel_reader"
   get "panel_author", to: "users#panel_author"
 end

@@ -22,7 +22,10 @@ class BooksController < ApplicationController
   end
   
 
-  def show    
+  def show 
+    @book = Book.find params[:id]
+    @review = Review.new
+    @reviews = @book.reviews
   end
 
   def edit
