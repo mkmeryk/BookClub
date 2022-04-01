@@ -22,7 +22,6 @@ class ReviewsController < ApplicationController
         else
             redirect_to book_path(@book.id), status: 303
         end
-
     end
 
     def update 

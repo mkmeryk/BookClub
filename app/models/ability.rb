@@ -44,6 +44,10 @@ class Ability
       user == review.user
     end
 
+    can :crud, Rating do |rating|
+      user == rating.user
+    end
+
     can(:like, Review) do |review|
       user.persisted? && review.user != user
     end
