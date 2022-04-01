@@ -12,26 +12,26 @@
     <div>
         <%= form.label :title %>
         <br>
-        <%= form.text_field :title %>
+        <%= form.text_field :title ,class:"form-control" %>
     </div>
     
     <div>
         <%= form.label :image_url %>
         <br>
-        <%= form.text_field :image_url %>
+        <%= form.text_field :image_url ,class:"form-control" %>
     </div>
     <div>
         <%= form.label :introduction %>
         <br>
-        <%= form.text_area :introduction, cols: 50, rows: 5 %>
+        <%= form.text_area :introduction, cols: 50, rows: 5 ,class:"form-control" %>
     </div>
     
     <div>
         <%= form.label :genre %>
         <br>
-        <%= form.text_field :genre %>
+        <%= form.text_field :genre ,class:"form-control" %>
     </div>
-
+    <br>
  
-    <%= form.submit "Add Book" %>
+    <%= form.submit "Add Book", class:"btn btn-primary" %>
 <% end %>

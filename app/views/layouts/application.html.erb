@@ -11,17 +11,47 @@
   </head>
 
   <body>
-    <nav>
-     <%= link_to 'Books Page', books_path%>
-     <%= link_to 'Create a new book', new_book_path %>
-      <%if(user_signed_in?) %>
-        Hello <%= current_user.full_name%>        
-        <%= button_to "Log out", sessions_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Sign In Page', new_sessions_path%>
-        <%= link_to 'Sign Up', new_user_path %>
-      <% end %>
+    <nav class="nav">
+
     </nav>
+    <ul class="nav justify-content-between bg-info p-1 text-dark bg-opacity-25">
+      <div>
+        <li class="nav-item">
+          <a class="nav-link border border-secondary rounded border border-2" href="/">Book Club</a>
+        </li>      
+      </div>
+      <div class="d-flex ">
+        <li class="nav-item">
+          <a class="nav-link" href="/books">Book Collection</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/books/new">Add a new Book</a>
+        </li>
+        <li class="nav-item">
+          <%if(user_signed_in?) %>
+          <div class="d-flex">
+            <div class="align-self-center">
+              Hello <%= current_user.full_name%> 
+            </div>
+            <div class="p-1">
+              <%= button_to "Log out", sessions_path, method: :delete, class:"btn btn-info" %>
+            </div>          
+          </div>
+          <% else %>
+            <div class="d-flex">
+              <div class="p-2">
+                <a href="/sessions/new">Sign In Page</a>
+              </div>
+              <div class="align-self-center">
+                <a href="/users/new">Sign Up</a>
+              </div>         
+            </div>
+
+          <% end %>        
+        </li>      
+      </div>
+
+    </ul>
     <%= yield %>
   </body>
 </html>
