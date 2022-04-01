@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'books/index'
-  get 'books/new'
-  get 'books/show'
-  get 'books/edit'
+
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,7 +8,11 @@ Rails.application.routes.draw do
   resources :users
   resource :sessions, only:[:new, :create, :destroy]
   resources :books do 
-    resources :reviews, only:[:create, :edit, :destroy, :update]
+    resources :reviews, only:[:create, :edit, :destroy, :update] do
+      resources :likes, shallow: true, only: [:create, :destroy]
+
+      get :liked, on: :collection
+    end
   end
   get "panel_reader", to: "users#panel_reader"
   get "panel_author", to: "users#panel_author"
