@@ -26,6 +26,10 @@ class BooksController < ApplicationController
     @book = Book.find params[:id]
     @review = Review.new
     @reviews = @book.reviews
+    @current_user_review = @reviews.find_by(user: current_user)
+    @like = @current_user_review.likes.find_by(user: current_user)
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#{@like}"
+
   end
 
   def edit
@@ -53,6 +57,7 @@ class BooksController < ApplicationController
   def find_book
     @book = Book.find params[:id]
   end
+
 
   def book_params
     params.require(:book).permit(:title, :image_url, :introduction, :genre)
