@@ -17,7 +17,10 @@ class UsersController < ApplicationController
   end
 
   def panel_reader
+    @reviews = Review.all
   end
   def panel_author
+    @notifications = Notification.all
+    @books = Book.all
   end
 end
