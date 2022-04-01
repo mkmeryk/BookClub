@@ -1,1 +1,21 @@
 <h1>Readers Panel</h1>
+
+<ul>
+    <% @reviews.each do |review|%>
+        <ul style="list-style-type: none;">
+            <li >
+            <%= form_with(model:[review.book, review], url: book_review_path(review.book, review), method: :patch) do |f|%>
+                <div>
+                <% if (review.user_id == current_user.id && review.approval == "Nil")%>
+                    <%= review.body %>
+                    <%= f.select :approval, [["Send", "Pending"], ["Delete", "Rejected"]] %>
+                    <br>
+                    <%= link_to 'Edit', edit_book_review_path(review.book.id, review.id), method: :get , class:"btn btn-primary"%>
+                    <%= f.submit "Submit" , class:"btn btn-primary" %>
+                <% end %>
+                </div>
+            <% end %> 
+            </li>
+        </ul>
+    <% end %>
+</ul>

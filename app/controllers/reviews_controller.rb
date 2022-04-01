@@ -4,10 +4,13 @@ class ReviewsController < ApplicationController
     before_action :review_params, only: [:edit, :update, :destroy]
 
     def create
-        @review = Review.new(params.require(:review).permit(:body))
+        @review = Review.new(params.require(:review).permit(:body, :approval))
         @review.book = @book;
         @review.user = current_user
         if @review.save
+            if @review.approval == "Pending"
+                @notification = Notification.create(user_id: current_user.id, review_id: @review.id )
+            end
             redirect_to book_path(@book.id), status: 303
         else
             @reviews = @book.reviews
@@ -25,7 +28,7 @@ class ReviewsController < ApplicationController
     end
 
     def update 
-        @review.update params.require(:review).permit(:body)
+        @review.update params.require(:review).permit(:body, :approval)
         book = @review.book_id 
         redirect_to book_path(@book.id), status: 303
     end
