@@ -9,7 +9,7 @@
                 <img style="width:200px" class="p-3 rounded float-start" src='<%= book.image_url %>' alt=''>
                 <div class="flex-grow-1 p-3 align-self-center">
                     <div>
-                        <h2><%= link_to book.title, book_path(book) %></h2>
+                        <h2><%= link_to book.title, book_path(book), class:"text-decoration-none" %></h2>
                     </div>
                     <div>
                         <p><%= book.introduction %></p>
