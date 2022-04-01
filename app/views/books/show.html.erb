@@ -33,8 +33,16 @@
                 <div>
                     <small>reviewed <%= time_ago_in_words(review.created_at) %> ago by <label>Created by: <%= review.user.full_name%> </label>
                     </small>
+                    <small>Like count: <%= review.likes.count %> </small>
                 </div>
                 <div>
+                    <small>
+                        <% if (review.likes.find_by(user: current_user)).present? %>
+                            <%= button_to 'unlike', like_path(review.likes.find_by(user: current_user)), method: :delete %>
+                        <% else %>
+                            <%= button_to 'like', book_review_likes_path(@book ,review), method: :post %>
+                        <% end %>
+                    </small>
                     <% if can? :crud, review %>
                         <%= button_to "Delete", book_review_path(@book.id, review.id), method: :delete %>
                         <%= button_to 'Edit', edit_book_review_path(@book.id, review.id), method: :get , class:"btn btn-primary"%>

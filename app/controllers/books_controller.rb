@@ -38,7 +38,6 @@ class BooksController < ApplicationController
     if (@ratings.count > 0)
       avg_rating = (sum / (@ratings.count))    
     end
-     
     @book.avg_rating = avg_rating 
   end
 
@@ -67,6 +66,7 @@ class BooksController < ApplicationController
   def find_book
     @book = Book.find params[:id]
   end
+
 
   def book_params
     params.require(:book).permit(:title, :image_url, :introduction, :genre)
