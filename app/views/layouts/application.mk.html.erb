@@ -12,7 +12,7 @@
 
   <body>
     <nav>
-     <%= link_to 'Books Page', books_path%>
+     <%= link_to 'Books Page', books_index_path%>
       <%if(user_signed_in?) %>
         Hello <%= current_user.full_name%>        
         <%= button_to "Log out", sessions_path, method: :delete %>

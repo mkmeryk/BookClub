@@ -47,6 +47,7 @@
             <br>
             <%= f.text_area :body, cols:50, rows: 2 ,class:"form-control" %>
         </div>
+        <%= f.select :approval, ["Nil", "Pending"] %>
         <br>
         <%= f.submit "send" , class:"btn btn-primary" %>
     <% end %>  
