@@ -39,6 +39,9 @@ class Ability
     can :crud, Book do |book|
       user == book.user
     end
+    can :crud, Review do |review|
+      user == review.user
+    end
 
   end
 end

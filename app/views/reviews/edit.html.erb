@@ -1,0 +1,9 @@
+<%= form_with(model:[@book, @review], url: book_review_path, method: :patch ) do |f|%>
+        <div>
+            <%= f.label :body%>
+            <br>
+            <%= f.text_area :body, cols:50, rows: 2 ,class:"form-control" %>
+        </div>
+        <br>
+        <%= f.submit "Edit" , class:"btn btn-primary" %>
+<% end %> 
