@@ -1,0 +1,31 @@
+<h1>Authors Panel</h1>
+<div>
+<% @notifications.each do |notification|%>
+    <ul style="list-style-type: none;">
+        <li >
+        <%#= form_with(model:[@book, @review], url: book_review_path, method: :patch ) do |f|%>
+        <%= form_with(model:[notification.review.book, notification.review], url: book_review_path(notification.review.book, notification.review), method: :patch) do |f|%>
+            <div>
+            <% if (notification.review.book.user_id == current_user.id && notification.review.approval == "Pending")%>
+                <%= notification.review.body %> is pending... please have a look
+                <%= f.select :approval, [["Approve", "Approved"], ["Reject", "Rejected"]] %>
+                <br>
+                <%= f.submit "Submit" , class:"btn btn-primary" %>
+            <% end %>
+            </div>
+        <% end %> 
+        </li>
+    </ul>
+<% end %>
+</div>
+<div>
+    <ul>
+        <% @books.each do |book|%>
+            <% if (book.user_id == current_user.id)%>
+                <li>
+                    <%= book.title%>
+                </li>
+            <% end %>
+        <% end %>
+    </ul>
+</div>
